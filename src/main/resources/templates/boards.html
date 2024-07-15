@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<h1>리스트</h1>
-<div layout:fragment="content" class="container my-3">
-    <div th:if="${!paging.isEmpty()}">
-        <table class="table">
-            <thead class="thead-light">
-            <tr class="text-center">
-                <th scope="col">글번호</th>
-                <th scope="col">글제목</th>
-                <th scope="col">작성시간</th>
-            </tr>
-            </thead>
-            <tbody >
-<!--            <tr th:each="questionlist, loop : ${paging}">-->
-<!--                <td>-->
-<!--                    <div th:text="${loop.id}"></div>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <div th:text="${b.title}"></div>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <div th:text="${b.createdAt}"></div>-->
-<!--                </td>-->
-<!--            </tr>-->
-            </tbody>
-        </table>
-        <ul class="pagination justify-content-center">
-            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{|?page=${paging.number-1}|}">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'"
-                class="page-item">
-                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-            </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+<h1>게시판 웹 서비스</h1>
+<div class="col-md-12" th:if="${!paging.isEmpty()}">
+    <!-- 목록 출력 영력 -->
+    <table class="table table-horizontal table-bordered" style="text-align: center">
+        <tr>
+            <th>게시글 번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        <tr th:each="b: ${paging}" th:onclick="">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.title}"></td>
+            <td th:text="${b.userName}"></td>
+            <td th:text="${b.createdAt}"></td>
+        </tr>
+    </table>
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+            <a class="page-link"
+               th:href="${!paging.hasPrevious} ? '#' : @{|?page=${paging.number-1}|}">
+                <span>이전</span>
+            </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            th:if="${page >= paging.number-5 and page <= paging.number+5}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item">
+            <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+        </li>
+        <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+            <a class="page-link" th:href="${!paging.hasNext} ? '#' : @{|?page=${paging.number+1}|}">
+                <span>다음</span>
+            </a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

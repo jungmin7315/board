@@ -1,8 +1,8 @@
 package com.nc13.board.service;
 
-import com.nc13.board.model.entity.BoardEntity;
+import com.nc13.board.model.dto.BoardDTO;
 import org.springframework.data.domain.Page;
 
 public interface BoardService {
-    Page<BoardEntity> getAll(int page);
+    Page<BoardDTO> getAll(int page);
 }

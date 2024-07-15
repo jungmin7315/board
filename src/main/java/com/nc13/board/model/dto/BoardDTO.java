@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -12,9 +12,7 @@ public class BoardDTO {
     private Long id;
     private String title;
     private String content;
-    @DateTimeFormat(pattern = "yyyy-MM-dd`T`HH:mm:ss")
-    private LocalDate createdAt;
-    @DateTimeFormat(pattern = "yyyy-MM-dd`T`HH:mm:ss")
-    private LocalDate updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String userName;
 }
