@@ -21,15 +21,6 @@ public class BoardServiceImpl implements BoardService{
 
     private final BoardRepository boardRepository;
 
-//    @Override
-//    public Page<BoardEntity> getAll(int page) {
-//        List<Sort.Order> sorts = new ArrayList<>();
-//        sorts.add(Sort.Order.desc("id"));
-//        Pageable pageable = PageRequest.of(page, 20, Sort.by(sorts));
-//
-//        return this.boardRepository.findAll(pageable);
-//    }
-
     @Override
     public Page<BoardDTO> getAll(int page) {
         List<Sort.Order> sorts = new ArrayList<>();

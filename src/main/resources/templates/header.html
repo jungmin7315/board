@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-
+<div th:fragment="header-ver1">
+    <div>
+        <a th:href="@{/boards}" th:text="'게시글 목록'"></a>
+    </div>
+</div>
+<div th:fragment="header-ver2">
+    <div>
+        <a th:href="@{/users/signIn}" th:text="'로그인'"></a>
+        <a th:href="@{/users/signUp}" th:text="'회원가입'"></a>
+    </div>
+</div>
+<div th:fragment="header-signIn">
+    <div>
+        <a th:href="@{/boards}" th:text="'게시글 목록'"></a>
+        <a th:href="@{/boards/new}" th:text="'게시글 작성'"></a>
+        <a th:href="@{/logOut}" th:text="'로그아웃'"></a>
+    </div>
+</div>
 </body>
 </html>
