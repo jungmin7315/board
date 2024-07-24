@@ -14,6 +14,7 @@
 </div>
 <div th:fragment="header-signIn">
     <div>
+        <a th:text="${#authentication.name}+'님'"></a>
         <a th:href="@{/boards}" th:text="'게시글 목록'"></a>
         <a th:href="@{/boards/new}" th:text="'게시글 작성'"></a>
         <a th:href="@{/logOut}" th:text="'로그아웃'"></a>

@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 
@@ -15,14 +16,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @DynamicUpdate
 @Table(name = "users")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UsersEntity {
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+public class UsersEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "email", nullable = false,unique = true, length = 50)
+    @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
 
     @Column(name = "password", nullable = false, length = 60)

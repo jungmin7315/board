@@ -2,9 +2,12 @@ package com.nc13.board.controller;
 
 
 import com.nc13.board.model.dto.BoardDTO;
+import com.nc13.board.model.dto.UserDTO;
 import com.nc13.board.service.BoardServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

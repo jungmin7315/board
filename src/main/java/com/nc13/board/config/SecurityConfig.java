@@ -1,5 +1,6 @@
 package com.nc13.board.config;
 
+import com.nc13.board.service.UserAuthService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,23 +11,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http, UserAuthService userAuthService) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/","/boards","/users/**")
+                        .requestMatchers("/","/boards","/users/signUp","/users/signIn","/error/**", "/users")
                         .permitAll()
-                        .anyRequest()
-                        .authenticated()
+                        .requestMatchers("/boards/*").hasRole("USER")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(formLogin -> formLogin
+                .formLogin((formLogin) -> formLogin
                         .loginPage("/users/signIn")
+                        .failureForwardUrl("/error/logInFailure")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/users/auth")
+                        .defaultSuccessUrl("/boards")
+                        .loginProcessingUrl("/users/auth")
                 )
                 .logout((logout)->logout
+                        .logoutUrl("/logOut")
                         .logoutSuccessUrl("/boards")
-                        .invalidateHttpSession(true));
+                        .invalidateHttpSession(true))
+                .userDetailsService(userAuthService);
         return http.build();
     }
 

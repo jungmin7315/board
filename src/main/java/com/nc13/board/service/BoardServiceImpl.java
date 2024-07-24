@@ -37,4 +37,20 @@ public class BoardServiceImpl implements BoardService{
                 .build());
         return boards;
     }
+
+    @Override
+    public BoardDTO findById(long id) {
+        BoardEntity boardEntity = boardRepository.findById(id);
+        BoardDTO boardDTO = BoardDTO.builder()
+                .id(boardEntity.getId())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .createdAt(boardEntity.getCreatedAt())
+                .updatedAt(boardEntity.getUpdatedAt())
+                .userName(boardEntity.getUser().getName())
+                .build();
+        return boardDTO;
+    }
+
+
 }
